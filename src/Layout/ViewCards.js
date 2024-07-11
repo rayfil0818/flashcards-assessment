@@ -1,10 +1,32 @@
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link, useParams } from 'react-router-dom';
+import { deleteCard, readDeck } from '../utils/api';
 
-import React from 'react';
-import { useNavigate, useMatch, Link } from 'react-router-dom';
-import { deleteCard } from '../utils/api';
-
-function ViewCards({ cards = [] }) {
+function ViewCards({ initialCards = [] }) {
   const navigate = useNavigate();
+  const { deckId } = useParams();
+  const [cards, setCards] = useState(initialCards);
+
+  useEffect(() => {
+    const abortController = new AbortController();
+    async function loadDeck() {
+      try {
+        const deck = await readDeck(deckId, abortController.signal);
+        if (deck && deck.cards) {
+          setCards(deck.cards);
+        }
+      } catch (error) {
+        if (error.name !== 'AbortError') {
+          throw error;
+        }
+      }
+    }
+
+    loadDeck();
+    return () => {
+      abortController.abort();
+    };
+  }, [deckId]);
 
   const deleteCardHandler = async (cardId) => {
     const response = window.confirm(
@@ -12,7 +34,7 @@ function ViewCards({ cards = [] }) {
     );
     if (response) {
       await deleteCard(cardId);
-      navigate('/');
+      setCards((currentCards) => currentCards.filter((card) => card.id !== cardId));
     }
   };
 
@@ -24,7 +46,7 @@ function ViewCards({ cards = [] }) {
           <div className='col-5'>
             {card.back}
             <div>
-              <Link to={`/cards/${card.id}/edit`}>
+              <Link to={`/decks/${deckId}/cards/${card.id}/edit`}>
                 <button className='btn btn-secondary m-3'>
                   <i className='fas fa-edit'></i> Edit
                 </button>
@@ -41,6 +63,7 @@ function ViewCards({ cards = [] }) {
       </div>
     </div>
   ));
+
   return (
     <div>
       <div className='card'>

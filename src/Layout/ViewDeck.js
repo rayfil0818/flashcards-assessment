@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useParams, useNavigate, Route, Routes } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { deleteDeck, readDeck } from '../utils/api';
 import ViewCards from './ViewCards';
 
@@ -105,7 +105,7 @@ function ViewDeck() {
           </div>
         </div>
       </div>
-      <ViewCards cards={deck.cards} />
+      <ViewCards cards={deck.cards || []} />
     </div>
   );
 }

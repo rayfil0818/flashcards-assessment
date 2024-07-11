@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { readDeck } from '../utils/api';
@@ -31,7 +30,7 @@ function StudyDeck() {
         if (mountedRef.current) {
           setStudyDeckState((currentState) => ({
             ...currentState,
-            deck: loadedDeck,
+            deck: { ...loadedDeck, cards: loadedDeck.cards || [] }, // Ensure cards is an array
           }));
         }
       } catch (error) {
@@ -49,7 +48,7 @@ function StudyDeck() {
   function flipCardHandler() {
     setStudyDeckState({
       ...studyDeckState,
-      isCardFlipped: !studyDeckState['isCardFlipped'],
+      isCardFlipped: !studyDeckState.isCardFlipped,
     });
   }
 
@@ -63,13 +62,19 @@ function StudyDeck() {
         setStudyDeckState((currentState) => ({
           ...currentState,
           currentIndex: 0,
+          isCardFlipped: false, // Reset the flip state
+        }));
+      } else {
+        setStudyDeckState((currentState) => ({
+          ...currentState,
+          currentIndex: 0,
         }));
       }
     } else {
       setStudyDeckState((currentState) => ({
         ...currentState,
-        currentIndex: currentState.currentIndex++,
-        isCardFlipped: !currentState.isCardFlipped,
+        currentIndex: currentState.currentIndex + 1,
+        isCardFlipped: false, // Reset the flip state
       }));
     }
   }
@@ -92,7 +97,7 @@ function StudyDeck() {
     </nav>
   );
 
-  if (deck.cards.length <= 2) {
+  if (!deck.cards || deck.cards.length <= 2) {
     return (
       <div>
         {breadcrumb}
