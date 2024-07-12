@@ -39,7 +39,7 @@ function HomeWithCreateButton() {
     <div>
       <Link to='/decks/new'>
         <button className='btn btn-secondary'>
-          <i className='fas fa-plus'></i> Create Deck
+          <i className='fas fa-plus'></i> ＋ Create Deck
         </button>
       </Link>
       <Home />

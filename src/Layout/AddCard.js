@@ -64,7 +64,12 @@ function AddCard() {
     event.preventDefault();
     await createCard(deckId, newCardData);
     setNewCardData(initialFormState);
-    navigate('/');
+    <CardForm
+    changeHandler={changeHandler}
+    submitHandler={submitHandler}
+    newCardData={newCardData}
+    deckId={deckId}
+    />
   };
   return (
     <div>

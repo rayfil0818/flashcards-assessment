@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { readDeck } from '../utils/api';
 
 function StudyDeck() {
   const mountedRef = useRef(false);
+  const navigate = useNavigate();
   const initialState = {
     deck: { name: 'loading...', cards: [] },
     isCardFlipped: false,
@@ -69,6 +70,7 @@ function StudyDeck() {
           ...currentState,
           currentIndex: 0,
         }));
+        navigate('/');
       }
     } else {
       setStudyDeckState((currentState) => ({

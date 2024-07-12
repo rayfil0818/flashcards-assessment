@@ -74,7 +74,7 @@ function ViewDeck() {
                 className='btn btn-secondary'
                 onClick={() => navigate(`/decks/${deck.id}/edit`)}
               >
-                <i className='fas fa-edit'></i> Edit
+                <i className='fas fa-edit'></i> ✏︎ Edit
               </button>
             </Link>
             <Link to={`/decks/${deck.id}/study`}>
@@ -83,7 +83,7 @@ function ViewDeck() {
                 className='btn btn-primary'
                 onClick={() => navigate(`/decks/${deck.id}/study`)}
               >
-                <i className='fas fa-book'></i> Study
+                <i className='fas fa-book'></i> 📖 Study
               </button>
             </Link>
             <Link to={`/decks/${deck.id}/cards/new`}>
@@ -92,7 +92,7 @@ function ViewDeck() {
                 className='btn btn-primary'
                 onClick={() => navigate(`/decks/${deck.id}/cards/new`)}
               >
-                <i className='fas fa-plus'></i> Add Cards
+                <i className='fas fa-plus'></i> ＋ Add Cards
               </button>
             </Link>
             <button
@@ -100,7 +100,7 @@ function ViewDeck() {
               className='btn btn-danger'
               onClick={() => deleteHandler(deckId)}
             >
-              <i className='fas fa-trash'></i> Delete Deck
+              <i className='fas fa-trash'></i> 🗑️ Delete Deck
             </button>
           </div>
         </div>

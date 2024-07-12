@@ -9,7 +9,6 @@ function Layout() {
     <div>
       <Header />
       <div className='container'>
-        <h1>Layout Component</h1>
         <Outlet />
       </div>
     </div>

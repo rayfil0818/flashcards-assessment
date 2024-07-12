@@ -39,20 +39,17 @@ function Home() {
             <h5 className='card-title'>{deck.name}</h5>
             <p className='card-text'>{deck.description}</p>
             <p className='card-text'>{deck.cards.length} cards</p>
-            <Link to={`/decks/${deck.id}`} className='btn btn-primary'>
-              View
+            <Link to={`/decks/${deck.id}`} className='btn btn-secondary'>
+              🔎 View
             </Link>
             <Link to={`/decks/${deck.id}/study`} className='btn btn-primary'>
-              Study
-            </Link>
-            <Link to={`/decks/${deck.id}/edit`} className='btn btn-secondary'>
-              Edit
+              📖 Study
             </Link>
             <button
               className='btn btn-danger'
               onClick={() => handleDeleteDeck(deck.id)}
             >
-              Delete
+              🗑️ Delete
             </button>
           </div>
         </div>
